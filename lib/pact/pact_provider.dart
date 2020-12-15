@@ -92,7 +92,6 @@ class PactProvider {
   }
 
   void expectRequestSentTo(String endpoint, StoredRequest storedRequest) {
-    //final StoredRequest storedRequest = _server.TakeRequest();
     expect(storedRequest.uri.path, endpoint);
   }
 
@@ -101,19 +100,12 @@ class PactProvider {
       @required String expectedValue,
       @required StoredRequest storedRequest,
       int requestIndex = 0}) {
-    // final StoredRequest storedRequest =
-    //     _getRecordedRequestAtIndex(requestIndex);
     final value = storedRequest.headers[key];
     expect(value, contains(expectedValue));
   }
 
   Future<void> expectRequestContainsBody(
       String expectedRequestBody, StoredRequest storedRequest) async {
-    //final StoredRequest storedRequest = _getRecordedRequestAtIndex(0);
     expect(storedRequest.body, expectedRequestBody);
   }
-
-  StoredRequest _getRecordedRequestAtIndex(int requestIndex) =>
-      List<StoredRequest>.generate(
-          requestIndex + 1, (i) => _server.takeRequest()).last;
 }
